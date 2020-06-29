@@ -14,12 +14,10 @@ In the case of faces, we can use thermal imaging to get the temperature of a sub
 
 Normally we could use this data with a calibrated sensor to get the exact temperature at certain spots, however this spot in which a person has to measure temperature is very specific and therefore sometimes hard to capture
 
-## Physical Design
+## Component Selection
+Like I said before, we wanted the Tig**IR** to be an affordable solution and using off the shelf parts. Luckily there were a few options for each which gave us some flexibility
 
-### Component Selection
-Like I said before, we wanted the Tig**IR** to be an affordable solution and using off the shelf parts. Luckily there were a few options for each which gave us some flexability
-
-#### The Brain
+### The Brain
 
 Being able to run who machine learning models and process incoming images can be a resource intensive task. For an effective solution you have two options
 1. Nvidia Jetson Nano
@@ -27,7 +25,21 @@ Being able to run who machine learning models and process incoming images can be
 
 2. Raspberry Pi 4 4GB model
 
+### The Sensors
+For our solution to work correctly, it requires two sensors one that sees the visible spectrum and the other 
+that sees IR. Instead of listing all the possible options, let me give you the reasons for the products we selected:
+
+1. LABISTS Raspberry Pi noIR Camera V2
+
+
+
+
+2. FLIR Radiometric Lepton V2.5 
+
 ### Enclosure
+
+### Misc
+
 
 ### Prototype development
 
