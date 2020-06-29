@@ -10,6 +10,28 @@ Focusing on the area of Healthcare Technology, My mentors Dr. Dane Smith, Dr. Ca
 
 For over 30 years, IR thermal cameras have been used to diagnose issues in many industries everything from healthcare applications to home cooling. This is because heat generated from sources emit a band of light that the human eye or any standard camera can perceive. However, when targeting said band, we can get the temperature of a point in space by the amount of light it emits. This is then mapped to a color map and creates images for diagnosing problems
 
+In the case of faces, we can use thermal imaging to get the temperature of a subject's face which will emit more IR energy if they have a fever aka an elevated body temperature
+
+Normally we could use this data with a calibrated sensor to get the exact temperature at certain spots, however this spot in which a person has to measure temperature is very specific and therefore sometimes hard to capture
+
+## Physical Design
+
+### Component Selection
+Like I said before, we wanted the Tig**IR** to be an affordable solution and using off the shelf parts. Luckily there were a few options for each which gave us some flexability
+
+#### The Brain
+
+Being able to run who machine learning models and process incoming images can be a resource intensive task. For an effective solution you have two options
+1. Nvidia Jetson Nano
+
+
+2. Raspberry Pi 4 4GB model
+
+### Enclosure
+
+### Prototype development
+
+## The Code
 
 ```markdown
 Syntax highlighted code block
