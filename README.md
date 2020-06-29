@@ -12,9 +12,11 @@ Focusing on the area of Healthcare Technology, my mentors Dr. Dane Smith, Dr. Ca
 
 For over 30 years, IR thermal cameras have been used to diagnose issues in many industries everything from healthcare applications to home cooling. This is because heat generated from sources emit a band of light that the human eye or any standard camera can perceive. However, when targeting said band, we can get the temperature of a point in space by the amount of light it emits. This is then mapped to a color map and creates images for diagnosing problems
 
+![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/thermal_example.PNG?raw=true)
+
 In the case of faces, we can use thermal imaging to get the temperature of a subject's face which will emit more IR energy if they have a fever aka an elevated body temperature
 
-Normally we could use this data with a calibrated sensor to get the exact temperature at certain spots, however these spots in which a person has to measure temperature is very specific and therefore sometimes hard to capture. Our solution is to use two sensors. One to use facial detection to get landmarks on the faces of people walking by and then map that to a thermal sensor to get a values which are then ran through a machine learning model for processing
+Normally we could use this data with a calibrated sensor to get the exact temperature at certain spots, however these spots in which a person has to measure temperature is very specific and therefore sometimes hard to capture. Our solution is to use two sensors. One to use facial detection to get landmarks on the faces of people walking by and then map that to a thermal sensor to get a values which are then ran through a machine learning model for inference.
 
 ## Component Selection
 Like I said before, we wanted the Tig**IR** to be an affordable solution and using off the shelf parts. Luckily there were a few options for each which gave us some flexibility
@@ -251,3 +253,7 @@ while True:
 ```
 
 ![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/lepton_test_colormap.PNG?raw=true)
+
+## The UI
+![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/web%20browser%20UI.png?raw=true)
+## Future Work
