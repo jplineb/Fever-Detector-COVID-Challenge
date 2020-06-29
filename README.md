@@ -3,7 +3,9 @@
 
 The Clemson COVID challenge was a summer virtual research and design opportunity for teams of faculty and undergraduates to work on problems related to the COVID-19 Pandemic as well as creating solutions for future pandemics. With partner university University of South Carolina and Prisma health, Teams had a little more than half a month to tackle a problem in the areas of communication, Education, Healthcare Technology, Policy/Economy/Logistics, or Society/Community.
 
-Focusing on the area of Healthcare Technology, My mentors Dr. Dane Smith, Dr. Carl Ehrett, and I decided to work on building a privacy-centric, affordable, open-source fever detection solution. With a team of students and me at the helm, four weeks of hard work converged to a solution conveniently named the Tig**IR** which ticked many of the boxes we wanted while coming in at sub $500.
+![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/COVID_Banner.jpg?raw=true)
+
+Focusing on the area of Healthcare Technology, my mentors Dr. Dane Smith, Dr. Carl Ehrett, and I decided to work on building a privacy-centric, affordable, open-source fever detection solution. With a team of students and me at the helm, four weeks of hard work converged to a solution conveniently named the Tig**IR** which ticked many of the boxes we wanted while coming in at sub $500.
 
 
 ## Background on using thermal cameras for Fever Detection
@@ -12,43 +14,55 @@ For over 30 years, IR thermal cameras have been used to diagnose issues in many 
 
 In the case of faces, we can use thermal imaging to get the temperature of a subject's face which will emit more IR energy if they have a fever aka an elevated body temperature
 
-Normally we could use this data with a calibrated sensor to get the exact temperature at certain spots, however this spot in which a person has to measure temperature is very specific and therefore sometimes hard to capture
+Normally we could use this data with a calibrated sensor to get the exact temperature at certain spots, however these spots in which a person has to measure temperature is very specific and therefore sometimes hard to capture. Our solution is to use two sensors. One to use facial detection to get landmarks on the faces of people walking by and then map that to a thermal sensor to get a values which are then ran through a machine learning model for processing
 
 ## Component Selection
 Like I said before, we wanted the Tig**IR** to be an affordable solution and using off the shelf parts. Luckily there were a few options for each which gave us some flexibility
 
 ### The Brain
 
-Being able to run who machine learning models and process incoming images can be a resource intensive task. For an effective solution you have two options
+Being able to run who machine learning models and process incoming images can be a resource intensive task. For an effective solution you have two options:
 1. Nvidia Jetson Nano
-+ has Cuda cores for dedicated machine learning techniques
-+ built in, very effective heat sink
-+ has pcie slot for storage or wifi
-+ Overclockable with a very capable arm processor
-+ Expensive
+	+ has Cuda cores for dedicated machine learning techniques
+	+ built in, very effective heat sink
+	+ has pcie slot for storage or wifi
+	+ Overclockable with a very capable arm processor
+	+ Expensive
 
+![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/jetsonnano.jpg?raw=true)
 
 2. Raspberry Pi 4 4GB model
-+ Affordable
-+ Build in Wifi and bluetooth
-+ Wider community support
-+ Neo-arm processor which is faster however dedicated GPU not as strong
-+ micro-hdmi
+	+ Affordable
+	+ Build in Wifi and bluetooth
+	+ Wider community support
+	+ Neo-arm processor which is faster however dedicated GPU not as strong
+	+ micro-hdmi
 
+
+![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/raspberrypi.jpg?raw=true)
+
+
+We ended up choosing the Raspberry Pi 4 for this project because of its affordability and neo-arm architecture.
 
 ### The Sensors
 For our solution to work correctly, it requires two sensors one that sees the visible spectrum and the other 
 that sees IR. Instead of listing all the possible options, let me give you the reasons for the products we selected:
 
 1. LABISTS Raspberry Pi noIR Camera V2
-* Sony mirrorless 8MP sensor capable of 1080p at 30fps
-* IR filter removed for better low light performance
-* Super easy to install with ribbon cable 
-* Low cost of $27.99 USD
+	* Sony mirrorless 8MP sensor capable of 1080p at 30fps
+	* IR filter removed for better low light performance
+	* Super easy to install with ribbon cable 
+	* Low cost of $27.99 USD
 
-3. FLIR Radiometric Lepton V2.5 
-* 80x60 IR solution for $250 USD
-* FLIR is known for their quality products, reliability, and documentation
+![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/picamera.jpg?raw=true)
+
+
+2. FLIR Radiometric Lepton V2.5 
+	* 80x60 IR solution for $250 USD
+	* FLIR is known for their quality products, reliability, and documentation
+
+
+![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/FLIR_Lepton.jpg?raw=true)
 
 ### Enclosure
 The enclosure we selected for this project was selected based on its features and price. The ** Miuzei Case** includes a fan and 4 aluminum heat sinks for cooling. This case also includes a 15W power supply which covered that component. The IO on this enclosure is really easy to access.
@@ -60,6 +74,8 @@ Some components that we had to purchase that are generic:
 
 ### Prototype development
 In order to have a test bed for developing code, I built a testbed to hold the sensors while we were finishing designing and prototyping the 3D printable enclosure.
+
+![](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/testbed.png?raw=true)
 
 ## Setting up the Pi 
 
@@ -75,10 +91,11 @@ To get the ip of the raspberry pi on your network simply type in a windows or Li
 ```
 ping raspberrypi
 ```
-
+![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/ping.PNG?raw=true)
 
 ### Installing the packages
 There are quite a number of packages that are necessary for this project along with their requirements:
+* Python 3.7
 * OpenCV with dlib
 * Numpy
 * Pandas
@@ -102,22 +119,135 @@ If the image is not generated check your connections and Pi configuration again.
 
 
 ## The Code
+In order to access many of the features shown below, clone the [github repo](here)
 
-```markdown
-Syntax highlighted code block
+### Testing Camera and Libraries
+#### Normal Camera
+To assure everything is working properly, we will create a simple script called picamera_test.py. first import your necessary libraries and initialize the camera and build a buffer. Here you can specify the output size, frame rate, and orientation of the image. Only use size and framerate combinations that are supported by your selected camera
+```python
+## import packages
+import cv2
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+import time
+import numpy as np
 
-# Header 1
-This is a test
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+## Test Video ##
+# initialize the camera and grab a reference to the raw camera capture
+camera = PiCamera()
+camera.resolution = (640, 480)
+camera.framerate = 32
+camera.rotation = 180
+rawCapture = PiRGBArray(camera, size=(640, 480))
 ```
+Then we will allow the camera to sleep for warm up
+```python
+time.sleep(0.1)
+```
+Next we will create a for loop that will update a cv2 window with grabbed frames from the camera. If you want to the test to stop at any time, press 'q'
+```python
+for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+    # grab the raw NumPy array representing the image, then initialize the timestamp
+    # and occupied/unoccupied text
+    image = frame.array
+    # show the frame
+    cv2.imshow("Frame", image)
+    key = cv2.waitKey(1) & 0xFF
+    # clear the stream in preparation for the next frame
+    rawCapture.truncate(0)
+    # if the `q` key was pressed, break from the loop
+    if key == ord("q"):
+        break
+```
+Then navigate in your terminal where you created your script and run it. This should be similar to your result
+
+![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/picamera_test.PNG?raw=true)
+
+#### Lepton Camera
+To assure you connected your GPIO pins correctly and the Pylepton library is work we are going to create a script named lepton_test.py
+
+First import the necessary packages, create a buffer to store the frames into, and then create a cv2 named window which we will display the frames on
+```python
+## Import packages
+import numpy as np
+import cv2
+from pylepton import Lepton
+
+# Create a buffer to save the images into
+lepton_buf = np.zeros((60,80,1), dtype=np.uint16)
+
+# Create a named window for the image to be placed into
+cv2.namedWindow("Thermal", cv2.WINDOW_NORMAL) # creates window
+cv2.resizeWindow('Thermal', 400,300) # resizes window to usable resolution
+```
+Then we want to create a while loop to constantly display the frames in the buffer
+```python
+while True:
+    with Lepton() as l:
+      a,_ = l.capture()
+      # Rotate image
+      a = np.rot90(a, 2)
+      # Convert to uint 8
+      a = (a/256).astype('uint8')
+      # Resize image
+      cv2.resize(a, (640,480))
+      # show image
+      cv2.imshow('Thermal',a)
+      key = cv2.waitKey(1) & 0xFF
+      # if the `q` key was pressed, break from the loop
+      if key == ord("q"):
+          break
+  ```
+
+Notice how when you run the script you get a grey image. This is because of the value ranges of the pixels
+![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/lepton_test_notnormed.PNG?raw=true)
+
+In order to introduce more contrast to the image, we need to normalize the pixel values by range of values and the images min and max values. So we update the script to the following
+```python
+while True:
+    with Lepton() as l:
+      a,_ = l.capture()
+      # normalize image
+      cv2.normalize(a,a, 0, 65353, cv2.NORM_MINMAX)
+      # Rotate image
+      a = np.rot90(a, 2)
+      # Convert to uint 8
+      a = (a/256).astype('uint8')
+      # Resize image
+      cv2.resize(a, (640,480))
+      # show image
+      cv2.imshow('Thermal',a)
+      key = cv2.waitKey(1) & 0xFF
+      # if the `q` key was pressed, break from the loop
+      if key == ord("q"):
+          break
+  ```
+
+Which gives us the following
+
+![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/lepton_test_normed.PNG?raw=true)
+
+
+Using CV2 we can also map pixels values to colors giving you a traditional IR thermal camera look:
+```python
+while True:
+    with Lepton() as l:
+      a,_ = l.capture()
+      cv2.normalize(a,a, 0, 65353, cv2.NORM_MINMAX)
+      # Rotate image
+      a = np.rot90(a, 2)
+      # Convert to uint 8
+      a = (a/256).astype('uint8')
+      # Resize image
+      cv2.resize(a, (640,480))
+      # Convert to color map
+      a = cv2.applyColorMap(a, cv2.COLORMAP_JET)
+      # show image
+      cv2.imshow('Thermal',a)
+      key = cv2.waitKey(1) & 0xFF
+      # if the `q` key was pressed, break from the loop
+      if key == ord("q"):
+          break
+```
+
+![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/lepton_test_colormap.PNG?raw=true)
