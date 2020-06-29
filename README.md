@@ -21,27 +21,85 @@ Like I said before, we wanted the Tig**IR** to be an affordable solution and usi
 
 Being able to run who machine learning models and process incoming images can be a resource intensive task. For an effective solution you have two options
 1. Nvidia Jetson Nano
++ has Cuda cores for dedicated machine learning techniques
++ built in, very effective heat sink
++ has pcie slot for storage or wifi
++ Overclockable with a very capable arm processor
++ Expensive
 
 
 2. Raspberry Pi 4 4GB model
++ Affordable
++ Build in Wifi and bluetooth
++ Wider community support
++ Neo-arm processor which is faster however dedicated GPU not as strong
++ micro-hdmi
+
 
 ### The Sensors
 For our solution to work correctly, it requires two sensors one that sees the visible spectrum and the other 
 that sees IR. Instead of listing all the possible options, let me give you the reasons for the products we selected:
 
 1. LABISTS Raspberry Pi noIR Camera V2
+* Sony mirrorless 8MP sensor capable of 1080p at 30fps
+* IR filter removed for better low light performance
+* Super easy to install with ribbon cable 
+* Low cost of $27.99 USD
 
-
-
-
-2. FLIR Radiometric Lepton V2.5 
+3. FLIR Radiometric Lepton V2.5 
+* 80x60 IR solution for $250 USD
+* FLIR is known for their quality products, reliability, and documentation
 
 ### Enclosure
+The enclosure we selected for this project was selected based on its features and price. The ** Miuzei Case** includes a fan and 4 aluminum heat sinks for cooling. This case also includes a 15W power supply which covered that component. The IO on this enclosure is really easy to access.
 
 ### Misc
-
+Some components that we had to purchase that are generic:
+* MicroSD Card
+* Breadboard Cables
 
 ### Prototype development
+In order to have a test bed for developing code, I built a testbed to hold the sensors while we were finishing designing and prototyping the 3D printable enclosure.
+
+## Setting up the Pi 
+
+### Preparing the SD Card
+Setting up a Raspberry Pi is quite simple these days. Using a computer with a microSD card slot or an external SD card reader, plug your microSD card into your computer and then allow the system to have writing permissions to said storage device (should be enabled by default). Next head over to [Raspberry OS Imager Guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) where you can download the Pi Imager and install your preferred version of Raspbian. 
+
+After the image is installed, create a txt file in the main directory of the microSD card named **SSH** to enable ssh forwarding. This allows you to connect to the Pi from a PC over a local network instead of having to find a mini-hdmi cable. Using **Windows Remote Desktop Protocol** you can even view the desktop in real time. This is where I did most of the development for this project. 
+
+In hopes that the Raspberry Pi community would have it's own OS image with the tools necessary to perform machine learning tasks on the Pi, my search came up with nothing but images locked behind pay walls that costs hundreds of dollars. In search for a cheap alternative solution, we have created an Image that contains OpenCV, Numpy, Pandas, Pytorch, and dlib compiled from source to run on the neo-arm architecture sufficiently so that you don't have to spend hours on lengthy tutorials. You can download that [Here](blank)
+
+### SSH into Pi
+To get the ip of the raspberry pi on your network simply type in a windows or Linux terminal 
+```
+ping raspberrypi
+```
+
+
+### Installing the packages
+There are quite a number of packages that are necessary for this project along with their requirements:
+* OpenCV with dlib
+* Numpy
+* Pandas
+* Pylepton
+* Pytorch
+* Picamera
+
+Many of these were compiled from source using cmake instead of pip installing so that they could take advantage of the neo-arm architecture. Tutorials for these libraries are available.
+
+### Enabling IO
+Using the Raspberry Pi configuration tool, make sure to enable the use of the GPIO pins and CSI ribbon slot. Once enabled, shut down the Pi and plug in the normal camera to the ribbon slot and plug each GPIO pin to its respective position as shown below. 
+
+To test to see if the normal camera is working type the following into a terminal which will generate at test image:
+
+```
+raspistill -o testshot.jpg
+```
+If the image is not generated check your connections and Pi configuration again. 
+
+
+
 
 ## The Code
 
@@ -63,13 +121,3 @@ This is a test
 
 [Link](url) and ![Image](src)
 ```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/jplineb/FeverDetectorCOVIDChallenge/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
