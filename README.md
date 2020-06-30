@@ -7,8 +7,11 @@ The Clemson COVID challenge was a summer virtual research and design opportunity
 
 Focusing on the area of Healthcare Technology, my mentors Dr. Dane Smith, Dr. Carl Ehrett, and I decided to work on building a privacy-centric, affordable, open-source fever detection solution. With a team of students and me at the helm, four weeks of hard work converged to a solution conveniently named the Tig**IR** which ticked many of the boxes we wanted while coming in at sub $500.
 
+## Why choose this problem
+In the wake of the Covid-19 outbreak it has become increasingly difficult to safely and responsibly navigate the normal tasks of our daily lives, especially while keeping the efficiency of life that we have come to expect. With a new normal of taking temperatures upon entering places of business, many solutions have incorporated the use of IR cameras and facial detection to aid in this process. However, these solutions can be expensive and what they do with this data behind closed doors could surrender your privacy. We wanted to create a solution that would allow us to regain the our efficiency of lives, while remaining safe and responsible to not only the pandemic we face but also our privacy. Given how powerful of a tool AI and thermal imaging are, it's obvious on why people would want to use them but there's a morally correct way of going about doing so.
 
-## Background on using thermal cameras for Fever Detection
+
+## Background on using thermal cameras for fever detection
 
 For over 30 years, IR thermal cameras have been used to diagnose issues in many industries everything from healthcare applications to home cooling. This is because heat generated from sources emit a band of light that the human eye or any standard camera can perceive. However, when targeting said band, we can get the temperature of a point in space by the amount of light it emits. This is then mapped to a color map and creates images for diagnosing problems
 
@@ -16,8 +19,14 @@ For over 30 years, IR thermal cameras have been used to diagnose issues in many 
 
 In the case of faces, we can use thermal imaging to get the temperature of a subject's face which will emit more IR energy if they have a fever aka an elevated body temperature
 
+![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/people_scanned_IR.jpg?raw=true)
+
 Normally we could use this data with a calibrated sensor to get the exact temperature at certain spots, however these spots in which a person has to measure temperature is very specific and therefore sometimes hard to capture. Our solution is to use two sensors. One to use facial detection to get landmarks on the faces of people walking by and then map that to a thermal sensor to get a values which are then ran through a machine learning model for inference.
 
+## Current solutions on the market
+![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/solution_1.PNG?raw=true)
+![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/solution_2.PNG?raw=true)
+![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/solution_3.PNG?raw=true)
 ## Component Selection
 Like I said before, we wanted the Tig**IR** to be an affordable solution and using off the shelf parts. Luckily there were a few options for each which gave us some flexibility
 
@@ -72,7 +81,11 @@ The enclosure we selected for this project was selected based on its features an
 ### Misc
 Some components that we had to purchase that are generic:
 * MicroSD Card
+	* Usually you want to choose at least a UHS Speed Class 3
+	* Need at least A2 read speed
+	* Rated at 90MB/s
 * Breadboard Cables
+	* Anything will work
 
 ### Prototype development
 In order to have a test bed for developing code, I built a testbed to hold the sensors while we were finishing designing and prototyping the 3D printable enclosure.
@@ -108,7 +121,13 @@ There are quite a number of packages that are necessary for this project along w
 Many of these were compiled from source using cmake instead of pip installing so that they could take advantage of the neo-arm architecture. Tutorials for these libraries are available.
 
 ### Enabling IO
-Using the Raspberry Pi configuration tool, make sure to enable the use of the GPIO pins and CSI ribbon slot. Once enabled, shut down the Pi and plug in the normal camera to the ribbon slot and plug each GPIO pin to its respective position as shown below. 
+Using the Raspberry Pi configuration tool, make sure to enable the use of the GPIO pins and CSI ribbon slot. 
+
+
+![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/pi_configuration.PNG?raw=true)
+
+
+Once enabled, shut down the Pi and plug in the normal camera to the ribbon slot and plug each GPIO pin to its respective position as shown below. 
 
 To test to see if the normal camera is working type the following into a terminal which will generate at test image:
 
@@ -121,7 +140,7 @@ If the image is not generated check your connections and Pi configuration again.
 
 
 ## The Code
-In order to access many of the features shown below, clone the [github repo](here)
+In order to access many of the features shown below, clone the [Fever-Detector-COVID-Challenge](https://github.com/jplineb/Fever-Detector-COVID-Challenge) repo
 
 ### Testing Camera and Libraries
 #### Normal Camera
