@@ -496,3 +496,4 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 ## The UI
 ![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/web%20browser%20UI.png?raw=true)
 ## Future Work
+<div class="flourish-embed flourish-photo-slider" data-src="visualisation/3129391" data-url="https://flo.uri.sh/visualisation/3129391/embed"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
