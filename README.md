@@ -507,7 +507,7 @@ For our design competition, I created a pitch video for this project in hopes of
 
 <!-- blank line -->
 <figure class="video_container">
-  <iframe src="https://www.youtube.com/watch?v=dCN8HfJhVs4&feature=youtu.be" frameborder="0" allowfullscreen="true"> </iframe>
+  <iframe src="https://www.youtube.com/embed/dCN8HfJhVs4" frameborder="0" allowfullscreen="true"> </iframe>
 </figure>
 <!-- blank line -->
 
