@@ -1,4 +1,5 @@
 
+
 ## Clemson COVID challenge
 
 The Clemson COVID challenge was a summer virtual research and design opportunity for teams of faculty and undergraduates to work on problems related to the COVID-19 Pandemic as well as creating solutions for future pandemics. With partner university University of South Carolina and Prisma health, Teams had a little more than half a month to tackle a problem in the areas of communication, Education, Healthcare Technology, Policy/Economy/Logistics, or Society/Community.
@@ -509,11 +510,16 @@ For our design competition, I created a pitch video for this project in hopes of
 
 <!-- blank line -->
 <figure class="video_container">
-  <iframe src="https://www.youtube.com/embed/dCN8HfJhVs4" frameborder="0" allowfullscreen="true" width="2000" height="2000"> </iframe>
+  <iframe src="https://www.youtube.com/embed/dCN8HfJhVs4" frameborder="0" allowfullscreen="true" width="1000" height="720"> </iframe>
 </figure>
 <!-- blank line -->
 
 
 
 ## Future Work
+Much of the ground work for this project has been layed however there is still quite a bit to go. In order to produce a reliable machine learning model that recognizes fever patients, more thermal imaging data needs to be captured. As for the network side, a full framework still needs to be produced in order for multiple devices to work on the network. Currently, the web UI is under construction and it projected to be finished before the end of Summer 2020.
 
+
+## Meet The Watt Fever Detection Team
+
+![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/Watt%20Fever%20Detection%20Team.png?raw=true)
