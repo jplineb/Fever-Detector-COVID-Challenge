@@ -5,10 +5,10 @@ The Clemson COVID challenge was a summer virtual research and design opportunity
 
 ![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/COVID_Banner.jpg?raw=true)
 
-Focusing on the area of Healthcare Technology, my mentors Dr. Dane Smith, Dr. Carl Ehrett, and I decided to work on building a privacy-centric, affordable, open-source fever detection solution. With a team of students and me at the helm, four weeks of hard work converged to a solution conveniently named the Tig**IR** which ticked many of the boxes we wanted while coming in at sub $500.
+Focusing on the area of Healthcare Technology, my mentors Dr. Hudson Smith, Dr. Carl Ehrett, and I decided to work on building a privacy-centric, affordable, open-source fever detection solution. With a team of students and me at the helm, four weeks of hard work converged to a solution conveniently named the Tig**IR** which ticked many of the boxes we wanted while coming in at sub $500.
 
-## Why choose this problem
-In the wake of the Covid-19 outbreak it has become increasingly difficult to safely and responsibly navigate the normal tasks of our daily lives, especially while keeping the efficiency of life that we have come to expect. With a new normal of taking temperatures upon entering places of business, many solutions have incorporated the use of IR cameras and facial detection to aid in this process. However, these solutions can be expensive and what they do with this data behind closed doors could surrender your privacy. We wanted to create a solution that would allow us to regain the our efficiency of lives, while remaining safe and responsible to not only the pandemic we face but also our privacy. Given how powerful of a tool AI and thermal imaging are, it's obvious on why people would want to use them but there's a morally correct way of going about doing so.
+## Why fever detection?
+In the wake of the COVID-19 outbreak it has become increasingly difficult to safely and responsibly navigate the normal tasks of our daily lives, especially while keeping the efficiency of life that we have come to expect. With a new normal of taking temperatures upon entering places of business, many solutions have incorporated the use of IR cameras and facial detection to aid in this process. However, these solutions can be expensive and what they do with this data behind closed doors could surrender your privacy. We wanted to create a solution that would allow us to regain the our efficiency of lives, while remaining safe and responsible to not only the pandemic we face but also our privacy. Given how powerful of a tool AI and thermal imaging are, it's obvious on why people would want to use them but there's a morally correct way of going about doing so.
 
 
 ## Background on using thermal cameras for fever detection
@@ -21,9 +21,11 @@ In the case of faces, we can use thermal imaging to get the temperature of a sub
 
 ![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/people_scanned_IR.jpg?raw=true)
 
-Normally we could use this data with a calibrated sensor to get the exact temperature at certain spots, however these spots in which a person has to measure temperature is very specific and therefore sometimes hard to capture. Our solution is to use two sensors. One to use facial detection to get landmarks on the faces of people walking by and then map that to a thermal sensor to get a values which are then ran through a machine learning model for inference.
+Normally we could use this data with a calibrated sensor to get the temperature at certain spots, however these locations on the human face have to be exact and therefore sometimes hard to capture. Our solution is to use two sensors: a IR thermal camera and a visual spectrum camera. The visual spectrum camera is uses facial detection to get landmarks on the faces of people walking by and then map that to a thermal sensor to get a values. The thermal data at these points are then passed to a machine learning model which will output whether or not the subject has a fever. 
 
 ## Current solutions on the market
+
+Several solutions to this problem already exists on the market, however they have a few short comings such as price, not being reviewed/validated/, and accessibility. We wanted to create a solution that any one can have access to, affordable, and reviewed. 
 ![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/solution_1.PNG?raw=true)
 ![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/solution_2.PNG?raw=true)
 ![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/solution_3.PNG?raw=true)
@@ -32,8 +34,8 @@ Like I said before, we wanted the Tig**IR** to be an affordable solution and usi
 
 ### The Brain
 
-Being able to run who machine learning models and process incoming images can be a resource intensive task. For an effective solution you have two options:
-1. Nvidia Jetson Nano
+Being able to run who machine learning models and process incoming images can be a resource intensive task. Many small compute units exits on the market exist however, for an effective solution we considered two options:
+**Nvidia Jetson Nano**
 	+ has Cuda cores for dedicated machine learning techniques
 	+ built in, very effective heat sink
 	+ has pcie slot for storage or wifi
@@ -42,7 +44,7 @@ Being able to run who machine learning models and process incoming images can be
 
 ![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/jetsonnano.jpg?raw=true)
 
-2. Raspberry Pi 4 4GB model
+ **Raspberry Pi 4 4GB model**
 	+ Affordable
 	+ Build in Wifi and bluetooth
 	+ Wider community support
@@ -76,7 +78,7 @@ that sees IR. Instead of listing all the possible options, let me give you the r
 ![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/FLIR_Lepton.jpg?raw=true)
 
 ### Enclosure
-The enclosure we selected for this project was selected based on its features and price. The ** Miuzei Case** includes a fan and 4 aluminum heat sinks for cooling. This case also includes a 15W power supply which covered that component. The IO on this enclosure is really easy to access.
+The enclosure we selected for this project was selected based on its features and price. The  **Miuzei Case** includes a fan and 4 aluminum heat sinks for cooling. This case also includes a 15W power supply which covered that component. The IO on this enclosure is really easy to access.
 
 ### Misc
 Some components that we had to purchase that are generic:
@@ -514,6 +516,4 @@ For our design competition, I created a pitch video for this project in hopes of
 
 
 ## Future Work
-<div class="flourish-embed flourish-photo-slider" data-src="visualisation/3129391" data-url="https://flo.uri.sh/visualisation/3129391/embed"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
-
 
