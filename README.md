@@ -509,7 +509,7 @@ For our design competition, I created a pitch video for this project in hopes of
 
 <!-- blank line -->
 <figure class="video_container">
-  <iframe src="https://www.youtube.com/embed/dCN8HfJhVs4" frameborder="0" allowfullscreen="true" width="1000" height="720"> </iframe>
+  <iframe src="https://www.youtube.com/embed/dCN8HfJhVs4" frameborder="0" allowfullscreen="true" width="2000" height="2000"> </iframe>
 </figure>
 <!-- blank line -->
 
