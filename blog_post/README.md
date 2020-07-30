@@ -34,29 +34,9 @@ Several solutions to this problem already exists on the market, however they hav
 Like I said before, we wanted the Tig**IR** to be an affordable solution and using off the shelf parts. Luckily there were a few options for each which gave us some flexibility
 
 ### The Brain
-
-Being able to run who machine learning models and process incoming images can be a resource intensive task. Many small compute units exits on the market exist however, for an effective solution we considered two options:
-**Nvidia Jetson Nano**
-	+ has Cuda cores for dedicated machine learning techniques
-	+ built in, very effective heat sink
-	+ has pcie slot for storage or wifi
-	+ Overclockable with a very capable arm processor
-	+ Expensive
-
-![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/jetsonnano.jpg?raw=true)
-
- **Raspberry Pi 4 4GB model**
-	+ Affordable
-	+ Build in Wifi and bluetooth
-	+ Wider community support
-	+ Neo-arm processor which is faster however dedicated GPU not as strong
-	+ micro-hdmi
-
+For this project we opted to use the Raspberry Pi 4. Being affordable, having a new arm processor, a wide community of support. Given by the mass inventory, its also availble all over the globe
 
 ![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/raspberrypi.jpg?raw=true)
-
-
-We ended up choosing the Raspberry Pi 4 for this project because of its affordability and neo-arm architecture.
 
 ### The Sensors
 For our solution to work correctly, it requires two sensors one that sees the visible spectrum and the other 
@@ -81,15 +61,6 @@ that sees IR. Instead of listing all the possible options, let me give you the r
 ### Enclosure
 The enclosure we selected for this project was selected based on its features and price. The  **Miuzei Case** includes a fan and 4 aluminum heat sinks for cooling. This case also includes a 15W power supply which covered that component. The IO on this enclosure is really easy to access.
 
-### Misc
-Some components that we had to purchase that are generic:
-* MicroSD Card
-	* Usually you want to choose at least a UHS Speed Class 3
-	* Need at least A2 read speed
-	* Rated at 90MB/s
-* Breadboard Cables
-	* Anything will work
-
 ### Prototype development
 In order to have a test bed for developing code, I built a testbed to hold the sensors while we were finishing designing and prototyping the 3D printable enclosure.
 
@@ -97,21 +68,7 @@ In order to have a test bed for developing code, I built a testbed to hold the s
 
 ## Setting up the Pi 
 
-### Preparing the SD Card
-Setting up a Raspberry Pi is quite simple these days. Using a computer with a microSD card slot or an external SD card reader, plug your microSD card into your computer and then allow the system to have writing permissions to said storage device (should be enabled by default). Next head over to [Raspberry OS Imager Guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) where you can download the Pi Imager and install your preferred version of Raspbian. 
-
-After the image is installed, create a txt file in the main directory of the microSD card named **SSH** to enable ssh forwarding. This allows you to connect to the Pi from a PC over a local network instead of having to find a mini-hdmi cable. Using **Windows Remote Desktop Protocol** you can even view the desktop in real time. This is where I did most of the development for this project. 
-
-In hopes that the Raspberry Pi community would have it's own OS image with the tools necessary to perform machine learning tasks on the Pi, my search came up with nothing but images locked behind pay walls that costs hundreds of dollars. In search for a cheap alternative solution, we have created an Image that contains OpenCV, Numpy, Pandas, Pytorch, and dlib compiled from source to run on the neo-arm architecture sufficiently so that you don't have to spend hours on lengthy tutorials. You can download that [Here](blank)
-
-### SSH into Pi
-To get the ip of the raspberry pi on your network simply type in a windows or Linux terminal 
-```
-ping raspberrypi
-```
-![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/ping.PNG?raw=true)
-
-### Installing the packages
+### Packages needed for the project
 There are quite a number of packages that are necessary for this project along with their requirements:
 * Python 3.7
 * OpenCV with dlib
@@ -138,9 +95,6 @@ To test to see if the normal camera is working type the following into a termina
 raspistill -o testshot.jpg
 ```
 If the image is not generated check your connections and Pi configuration again. 
-
-
-
 
 ## The Code
 In order to access many of the features shown below, clone the [Fever-Detector-COVID-Challenge](https://github.com/jplineb/Fever-Detector-COVID-Challenge) repo
