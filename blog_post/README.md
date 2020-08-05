@@ -43,17 +43,12 @@ For our solution to work correctly, it requires two sensors one that sees the vi
 that sees IR. Instead of listing all the possible options, let me give you the reasons for the products we selected:
 
 1. LABISTS Raspberry Pi noIR Camera V2
-	* Sony mirrorless 8MP sensor capable of 1080p at 30fps
-	* IR filter removed for better low light performance
-	* Super easy to install with ribbon cable 
-	* Low cost of $27.99 USD
+
 
 ![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/picamera.jpg?raw=true)
 
 
-2. FLIR Radiometric Lepton V2.5 
-	* 80x60 IR solution for $250 USD
-	* FLIR is known for their quality products, reliability, and documentation
+2. FLIR Radiometric Lepton V2.5
 
 
 ![enter image description here](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/FLIR_Lepton.jpg?raw=true)
@@ -64,9 +59,7 @@ The enclosure we selected for this project was selected based on its features an
 ### Prototype development
 In order to have a test bed for developing code, I built a testbed to hold the sensors while we were finishing designing and prototyping the 3D printable enclosure.
 
-![](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/testbed.png?raw=true)
-
-## Setting up the Pi 
+![](https://github.com/jplineb/FeverDetectorCOVIDChallenge/blob/master/Photos/testbed.png?raw=true) 
 
 ### Packages needed for the project
 There are quite a number of packages that are necessary for this project along with their requirements:
@@ -79,22 +72,6 @@ There are quite a number of packages that are necessary for this project along w
 * Picamera
 
 Many of these were compiled from source using cmake instead of pip installing so that they could take advantage of the neo-arm architecture. Tutorials for these libraries are available.
-
-### Enabling IO
-Using the Raspberry Pi configuration tool, make sure to enable the use of the GPIO pins and CSI ribbon slot. 
-
-
-![enter image description here](https://github.com/jplineb/Fever-Detector-COVID-Challenge/blob/master/Photos/pi_configuration.PNG?raw=true)
-
-
-Once enabled, shut down the Pi and plug in the normal camera to the ribbon slot and plug each GPIO pin to its respective position as shown below. 
-
-To test to see if the normal camera is working type the following into a terminal which will generate at test image:
-
-```
-raspistill -o testshot.jpg
-```
-If the image is not generated check your connections and Pi configuration again. 
 
 ## The Code
 In order to access many of the features shown below, clone the [Fever-Detector-COVID-Challenge](https://github.com/jplineb/Fever-Detector-COVID-Challenge) repo
@@ -302,10 +279,6 @@ import dlib
 from pylepton import Lepton
 import pandas as pd
 
-
-
-
-
 #Initialization of Camera/Windows
 camera = PiCamera()
 camera.resolution = (640, 480)
@@ -327,8 +300,7 @@ h = np.float32(np.load('trans_param.npy')) # get transform parameters from file
 
 # create data frame for data
 DF = pd.DataFrame(data=None, columns=['Face','LM1','LM2','LM3','LM4','LM5'])
-    
-    
+   
 #Allow Camera to warm up
 time.sleep(0.1)
 
